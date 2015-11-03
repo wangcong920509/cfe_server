@@ -19,7 +19,7 @@ def get_json(request):
         return HttpResponse(json.dumps(data, ensure_ascii=False))
     else:
         return HttpResponse("Current time is: "+time.strftime('%Y-%m-%d %H:%M:%S'))
-
+'''
 def login(request):
     if request.method == 'GET' and 'phone' in request.GET and 'pass' in request.GET:
         mphone = request.GET['phone']
@@ -32,3 +32,18 @@ def login(request):
     else:
         data = {"state": 2, "desc": "Lack Of Parameters"}
     return HttpResponse(json.dumps(data, ensure_ascii=False))
+
+def register(request):
+    if request.method == 'GET' and 'phone' in request.GET and 'pass' in request.GET:
+        mphone = request.GET['phone']
+        mpass = request.GET['pass']
+        getphone = t_admin.objects.filter(phone = mphone)
+        if(len(getphone) == 0):
+            t_admin.objects.create(phone = mphone, password = mpass)
+            data = {"state": 1, "desc": "Create Account Successfully"}
+        else:
+            data = {"state": 0, "desc": "Account already exists"}
+    else:
+        data = {"state": 2, "desc": "Lack Of Parameters"}
+    return HttpResponse(json.dumps(data, ensure_ascii=False))
+'''
