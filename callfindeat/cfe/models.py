@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class t_admin(models.Model):
-    level = models.IntegerField
+    level = models.IntegerField()
     password = models.CharField(max_length=255)
     phone = models.CharField(max_length=255)
     realname = models.CharField(max_length=255)
@@ -10,21 +10,21 @@ class t_admin(models.Model):
 
 class t_cash(models.Model):
     amount = models.FloatField(max_length=255)
-    cfrom = models.BigIntegerField
-    cto = models.BigIntegerField
+    cfrom = models.BigIntegerField()
+    cto = models.BigIntegerField()
     date = models.CharField(max_length=255)
-    state = models.IntegerField
+    state = models.IntegerField()
 
 class t_contractsite(models.Model):
     content = models.CharField(max_length=255)
     date = models.CharField(max_length=255)
-    state = models.IntegerField
+    state = models.IntegerField()
 
 class t_position(models.Model):
     refer = models.CharField(max_length=255)
-    type = models.IntegerField
-    x = models.IntegerField
-    y = models.IntegerField
+    type = models.IntegerField()
+    x = models.FloatField(max_length=255)
+    y = models.FloatField(max_length=255)
 
 class t_customer(models.Model):
     address = models.CharField(max_length=255)
@@ -35,12 +35,13 @@ class t_customer(models.Model):
     pid = models.ForeignKey(t_position)
 
 class t_deliver(models.Model):
-    age = models.IntegerField
-    isWork = models.IntegerField
+    age = models.IntegerField()
+    isWork = models.IntegerField()
     name = models.CharField(max_length=255)
     phone = models.CharField(max_length=255)
     sex = models.CharField(max_length=255)
     pid = models.ForeignKey(t_position)
+    password = models.CharField(max_length=255)
 
 class t_restaurant(models.Model):
     address = models.CharField(max_length=255)
@@ -62,7 +63,7 @@ class t_site(models.Model):
     csid = models.ForeignKey(t_contractsite)
 
 class t_ensurance(models.Model):
-    level = models.IntegerField
+    level = models.IntegerField()
     money = models.FloatField(max_length=255)
     rid = models.ForeignKey(t_restaurant)
     sid = models.ForeignKey(t_site)
@@ -70,7 +71,7 @@ class t_ensurance(models.Model):
 class t_evluatercrd(models.Model):
     #id = models.ForeignKey(t_deliver, t_customer)
     content = models.CharField(max_length=255)
-    level = models.IntegerField
+    level = models.IntegerField()
     cid = models.ForeignKey(t_customer)
     did = models.ForeignKey(t_deliver)
     time = models.CharField(max_length=255)
@@ -78,7 +79,7 @@ class t_evluatercrd(models.Model):
 class t_food(models.Model):
     name = models.CharField(max_length=255)
     price = models.FloatField(max_length=255)
-    rid = models.BigIntegerField
+    rid = models.BigIntegerField()
 
 class t_task(models.Model):
     distance = models.FloatField(max_length=255)
@@ -88,21 +89,21 @@ class t_task(models.Model):
 
 class t_order(models.Model):
     price = models.FloatField(max_length=255)
-    state = models.IntegerField
+    state = models.IntegerField()
     cid = models.ForeignKey(t_customer)
-    rid = models.ForeignKey(t_task)
+    rid = models.ForeignKey(t_restaurant)
     sid = models.ForeignKey(t_site)
     time = models.CharField(max_length=255)
-    tid = models.ForeignKey(t_restaurant)
+    tid = models.ForeignKey(t_task)
 
 class t_of(models.Model):
-    quantity = models.IntegerField
+    quantity = models.IntegerField()
     fid = models.ForeignKey(t_food)
     oid = models.ForeignKey(t_order)
 
 class t_salary(models.Model):
     basic = models.FloatField(max_length=255)
-    month = models.IntegerField
+    month = models.IntegerField()
     other = models.FloatField(max_length=255)
     prize = models.FloatField(max_length=255)
     did = models.ForeignKey(t_deliver)
